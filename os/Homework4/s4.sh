@@ -8,4 +8,8 @@ shift
 for file in $@
 do
     sed -i "s/\b\([a-z]\)/$letter\1/g" $file
+    # pretty straight forward
+    # s/ - substitute command
+    # \b - word boundary \([a-z]\) - lowercase letter
+    # \1 - the lowercase letter matched by the regex
 done

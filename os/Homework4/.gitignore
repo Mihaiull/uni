@@ -1,0 +1,2 @@
+*.txt #any txt
+!*/ #any folder but not the root

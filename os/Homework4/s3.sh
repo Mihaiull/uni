@@ -8,4 +8,5 @@ shift
 for file in $@
 do
     sed -i "/$word/d" $file
+    # do I even need to explain this?
 done

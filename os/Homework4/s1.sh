@@ -7,4 +7,9 @@ shift
 for word in $@
 do
     sed -i "s/$word//g" $filename #"s/$word//g" does the replacement, i googled it so it must be true
+    # s/ - substitute command
+    # $word - the word to be replaced
+    # // - replace with nothing
+    # g - replace all occurrences
+    # sanatate
 done
