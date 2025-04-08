@@ -19,10 +19,10 @@ if [ ! -f "$file1" ] || [ ! -f "$file2" ]; then
     exit 1
 fi
 
-# Initialize a counter for differing lines
+# Counter
 diff_count=0
 
-# Use a while loop to read both files line by line
+# magie
 while IFS= read -r line1 && IFS= read -r line2 <&3; do
     if [ "$line1" != "$line2" ]; then
         diff_count=$((diff_count + 1))
@@ -35,7 +35,6 @@ while IFS= read -r line1 && IFS= read -r line2 <&3; do
         fi
     fi
 done < "$file1" 3< "$file2"
-
 # If no differences were found
 if [ "$diff_count" -eq 0 ]; then
     echo "The files are identical."

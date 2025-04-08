@@ -2,8 +2,6 @@
 
 # Write a shell script which takes as parameters several file names.
 # The script will display the number of files, the average number of words per file and the total word count.
-# using awk
-
 
 # Initialize variables
 total_files=0

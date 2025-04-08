@@ -8,4 +8,5 @@ do
     sed -i "s/^..//" $file
     # .. - any 2 characters
     # ^ - beginning of the line
+    # pretty simple
 done

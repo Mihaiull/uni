@@ -6,4 +6,5 @@
 for file in $@
 do
     sed -i "s/[aeiou]/\U&/g" $file
+    # cmon this is simple y'all can figure it out
 done

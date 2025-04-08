@@ -10,7 +10,6 @@ y_approx = newton_interp_pol(x, F, x_approx)
 %b)
 x_vals = linspace(1,5,50);
 y_vals = arrayfun(@(t)newton_interp_pol(x,F,t), x_vals);
-
 %plotting
 figure
 plot(x,y,"ro");
