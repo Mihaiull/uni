@@ -1,26 +1,30 @@
+%Problem 3
+time = [0 3 5 8 13]; % in seconds
+distance = [0 225 383 623 993]; % in feet
+speed = [75 77 80 74 72]; % in feet/s
 
-% Given data
-time = [0 3 5 8 13]; % Time (in seconds)
-distance = [0 225 383 623 993]; % Distance (in feet)
-speed = [75 77 80 74 72]; % Speed (in feet/s)
+deriv_at_start = 75; % speed at t=0
+deriv_at_end = 72; % speed at t=13
 
-% Define first derivatives (speed) at endpoints for clamped spline
-dy_0 = 75;   % Speed at t=0
-dy_end = 72; % Speed at t=13
+spline_distance = spline(time, [deriv_at_start, distance, deriv_at_end]);
 
-% Create cubic clamped spline
-pp = spline(time, [dy_0, distance, dy_end]); 
+% Evaluate distance at t=10
+t_eval = 10;
+distance_at_10 = ppval(spline_distance, t_eval);
 
-% Interpolate position at t = 10 seconds
-t_query = 10;
-distance_clamped_spline = ppval(pp, t_query)
+breaks = spline_distance.breaks;
+coefs = spline_distance.coefs;
 
-% Extract coefficients for the spline segment containing t = 10
-coeffs = pp.coefs;
-segment_idx = find(time <= t_query, 1, 'last');
-a = coeffs(segment_idx, 1); % x^3 coefficient
-b = coeffs(segment_idx, 2); % x^2 coefficient
-c = coeffs(segment_idx, 3); % x coefficient
+interval = find(t_eval >= breaks(1:end-1) & t_eval < breaks(2:end));
+interval = interval(end);
 
-% Compute speed (first derivative of position)
-speed_clamped_spline = 3 * a * t_query^2 + 2 * b * t_query + c
+a = coefs(interval, 1);
+b = coefs(interval, 2);
+c = coefs(interval, 3);
+d = coefs(interval, 4);
+
+speed_at_10 = 3*a*(t_eval - breaks(interval))^2 + 2*b*(t_eval - breaks(interval)) + c;
+
+% Display results
+fprintf('Predicted position at t=10s: %.2f feet\n', distance_at_10);
+fprintf('Predicted speed at t=10s: %.2f ft/s\n', speed_at_10);

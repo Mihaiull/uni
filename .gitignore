@@ -4,3 +4,5 @@
 /os/*/words*
 /os/*/I_cannot_write
 /cv
+/matlab/*/*.asv
+
