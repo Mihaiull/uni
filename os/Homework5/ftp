@@ -1,0 +1,18 @@
+#!/bin/bash
+
+# as ideea eu nu stie background procesesses inca asa ca am facut un mumbo sa scoata logs, this is here just for refrence, the actual thing is in /usr/bin
+# basically doar rulezi the ftp command si asta scuipa loguri
+
+LOGFILE="/home/mihaiull/Documents/programming/os/Homework5/ftp_log"
+REAL_FTP="/usr/bin/ftp.real"
+
+USER=$(whoami)
+TIMESTAMP=$(date "+%Y-%m-%d %H:%M:%S")
+SERVER="$1"
+
+echo "$TIMESTAMP - USER: $USER - FTP to: ${SERVER:-[no server specified]}" >> "$LOGFILE"
+
+#might wanna also do the real ftp
+exec "$REAL_FTP" "$@"
+
+# si asa copii functioneaza o parte din virusi, nu Martinel, nu era minecraft, era nepotu lu' ILoveYou
