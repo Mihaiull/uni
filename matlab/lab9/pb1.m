@@ -1,44 +1,77 @@
-% Function definition
-f = @(x) exp(-x.^2);
-
-% Integration bounds
+%Problem 1
+%% Point a
 a = 1;
 b = 1.5;
+n = 5;
 
-%% Part (a): Single rectangle (n = 1) using midpoint
-n_a = 1;
-dx_a = (b - a);
-x_mid = (a + b) / 2;
-I_a = f(x_mid) * dx_a;
-fprintf('Part (a): Midpoint rectangle approximation (n=1): %.4f\n', I_a);
+% Compute step size
+dx = (b - a) / n;
 
-%% Part (b): Plot f(x) and midpoint rectangle
-x_vals = linspace(a, b, 400);
-y_vals = f(x_vals);
+% Generate left endpoints
+x = a : dx : b - dx;
 
-% Midpoint rectangle
-hold on;
+% Evaluate function at left endpoints
+f = exp(-x.^2);
+
+% Compute the rectangle rule approximation
+approx_integral = sum(f) * dx;
+
+% Display the result
+fprintf('Approximate integral using rectangle rule: %.5f\n', approx_integral);
+
+%% Point b
+f = @(x) exp(-x.^2);
+a = 1;
+b = 1.5;
+midpoint = (a + b)/2;
+height = f(midpoint);
+
+% Width of slim rectangle (e.g. 0.1 instead of 0.5)
+rect_width = 0.1;
+left = midpoint - rect_width/2;
+right = midpoint + rect_width/2;
+
+% Plot setup
 figure;
-plot(x_vals, y_vals, 'b-', 'LineWidth', 2, 'Color', 'm'); % Function plot
-rectangle_x = [a, b];
-rectangle_y = [f(x_mid), f(x_mid)];
-fill([a b b a], [0 0 f(x_mid) f(x_mid)], 'r', 'FaceAlpha', 0.3, 'EdgeColor', 'r');
-title('Function f(x) = e^{-x^2} and Midpoint Rectangle');
+
+% Plot the rectangle first (background)
+x_rect = [left right right left];
+y_rect = [0 0 height height];
+fill(x_rect, y_rect, [1 0.7 0.7], 'EdgeColor', 'k', 'FaceAlpha', 0.6);
+hold on;
+
+% Plot the function curve on top
+x = linspace(a, b, 500);
+y = f(x);
+plot(x, y, 'b-', 'LineWidth', 2);
+
+% Mark the midpoint
+plot(midpoint, height, 'ko', 'MarkerFaceColor', 'k');
+
+% Labels and legend
+title('Midpoint Rectangle Approximation');
 xlabel('x');
-ylabel('f(x)');
+ylabel('f(x) = e^{-x^2}');
+legend('Midpoint Rectangle', 'f(x)', 'Midpoint', 'Location', 'northeast');
 grid on;
 hold off;
 
-%% Part (c): Repeated midpoint rule with n = 150 and n = 500
-midpoint_rule = @(f, a, b, n) ...
-    sum(f(a + ((1:n) - 0.5) * (b - a) / n)) * (b - a) / n;
+%% Point c
+f = @(x) exp(-x.^2);
+a = 1;
+b = 1.5;
 
-% n = 150
+% For n = 150
 n1 = 150;
-I1 = midpoint_rule(f, a, b, n1);
-fprintf('Part (c): Midpoint approximation with n = 150: %.4f\n', I1);
+dx1 = (b - a) / n1;
+x_mid1 = linspace(a + dx1/2, b - dx1/2, n1);
+approx1 = dx1 * sum(f(x_mid1));
 
-% n = 500
+% For n = 500
 n2 = 500;
-I2 = midpoint_rule(f, a, b, n2);
-fprintf('Part (c): Midpoint approximation with n = 500: %.4f\n', I2);
+dx2 = (b - a) / n2;
+x_mid2 = linspace(a + dx2/2, b - dx2/2, n2);
+approx2 = dx2 * sum(f(x_mid2));
+
+fprintf('Approximation for n = 150: %.4f\n', approx1);
+fprintf('Approximation for n = 500: %.4f\n', approx2);
