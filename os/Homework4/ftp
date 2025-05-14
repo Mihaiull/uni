@@ -2,6 +2,8 @@
 
 # as ideea eu nu stie background procesesses inca asa ca am facut un mumbo sa scoata logs, this is here just for refrence, the actual thing is in /usr/bin
 # basically doar rulezi the ftp command si asta scuipa loguri
+# ofc tot ai nevoie de the real deal "ftp" care este gasit in pachetul inetutils-ftp (cel putin pe arch linux bdw)
+# rename the ftp command to ftp.real and put this script in its place
 
 LOGFILE="/home/mihaiull/Documents/programming/os/Homework5/ftp_log"
 REAL_FTP="/usr/bin/ftp.real"
