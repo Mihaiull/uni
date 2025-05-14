@@ -41,7 +41,7 @@ fill(x_rect, y_rect, [1 0.7 0.7], 'EdgeColor', 'k', 'FaceAlpha', 0.6);
 hold on;
 
 % Plot the function curve on top
-x = linspace(a, b, 500);
+x = linspace(a, b, 5000);
 y = f(x);
 plot(x, y, 'b-', 'LineWidth', 2);
 
