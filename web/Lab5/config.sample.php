@@ -1,9 +1,7 @@
 <?php
 /**
- * Local development (default): SQLite file — no server, no remote access.
- * Tables are created automatically on first request.
+ * Copy to config.php. sqlite_path: SQLite database file (created on first use).
  */
 return [
-    'driver' => 'sqlite',
     'sqlite_path' => __DIR__ . '/data/lab5.sqlite',
 ];
